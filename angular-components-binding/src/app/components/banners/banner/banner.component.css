@@ -1,0 +1,13 @@
+.ani{
+animation: beep 1.5s ease-in-out 1s infinite;
+}
+
+@keyframes beep {
+    from{
+        transform: scale(1);
+    }
+    to{
+        transform: scale(1.05);
+    }
+}
+    
