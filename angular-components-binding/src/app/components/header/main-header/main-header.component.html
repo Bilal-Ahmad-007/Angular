@@ -2,10 +2,10 @@
 <div class="w-full absolute">
     <div class="flex items-end justify-between h-[55px] px-[15px]">
 <img  src="https://magento-landing.arrowtheme.com/claue/images/logo.png" class="w-[88px] pb-[10px]" alt="">
-<div><img src="../../../../assets/slider.PNG" class="w-[64px] pt-[15px] mr-[8px] lg:hidden" alt=""></div>
+<button (click)="slider()"><img src="../../../../assets/slider.PNG" class="slide w-[64px] pt-[15px] mr-[8px] lg:hidden" alt=""></button>
 
 <ul class=" items-center justify-center hidden lg:flex text-white gap-14">
-    <li>Home</li>
+    <li><button (click)="Home()">Home</button> </li>
     <li>Front-End</li>
     <li>Main Feature</li>
     <li>Shop</li>
