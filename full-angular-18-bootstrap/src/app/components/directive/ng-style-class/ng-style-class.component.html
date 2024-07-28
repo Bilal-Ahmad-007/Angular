@@ -1,0 +1,43 @@
+<section class="d-flex ">
+<div class="d-flex flex-column justify-content-center align-items-center">
+<div class="div"
+
+[ngClass]="red?'bg-danger':'bg-primary'"
+></div>
+<div>
+    <button type="button" class="btn btn-danger  m-2"  (click)="redClick()">RED</button>
+    <button type="button" class="btn btn-primary m-2" (click)="blueClick()">BLUE</button>
+</div>
+
+
+</div>
+<div class="d-flex flex-column justify-content-center align-items-center">
+<div class="div"
+
+[ngClass]="warning?'bg-warning':'bg-primary'"
+></div>
+<div>
+  
+    <button type="button" class="btn btn-warning m-2" (click)="toggle()">toggle</button>
+</div>
+
+
+</div>
+<div class="d-flex flex-column justify-content-center align-items-center">
+<div class="div" 
+
+[ngStyle]="{
+'background-color': this.success ? 'green' : 'blue' 
+}"
+
+></div>
+<div>
+  
+    <button type="button" class="btn btn-success m-2" (click)=" ngStyleTogle() "> ngStyle toggle
+
+    </button>
+</div>
+
+
+</div>
+</section>

@@ -1,0 +1,39 @@
+<table class="table  table-bordered">
+    <thead>
+      <tr>
+        <th scope="col">Sr.No.</th>
+        <th scope="col">Name</th>
+        <th scope="col">Roll No.</th>
+        <th scope="col">Status On LinkdIn</th>
+        <th scope="col">City </th>
+        <th scope="col">Marks</th>
+      </tr>
+    </thead>
+    <tbody>
+@for (item of studentData; track $index) {
+      <tr>
+        <th scope="row">{{$index+1}}</th>
+        <td>{{item.name}}</td>
+        <td>{{item.rollNo}}</td>
+        @if (item.status) {
+            <td class="bg-primary">Activte </td>
+        }@else if (!item.status) {
+            <td  class="bg-danger">DeActivate</td>}
+        <td>{{item.city}}</td>
+        
+        <td>
+            <div class="progress">
+                <div class="progress-bar" role="progressbar" aria-label="Basic example" [ngStyle]="{'width': item.marks + '%'}"
+                
+                aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                    {{item.marks}}
+
+                </div>
+              </div>
+        </td>
+
+      </tr>
+  }
+     
+    </tbody>
+  </table>

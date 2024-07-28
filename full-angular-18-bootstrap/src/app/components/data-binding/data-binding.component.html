@@ -1,0 +1,57 @@
+<section>
+<div class="top-heading text-center  m-4 pb-3 border-bottom ">
+   One Way Data Binding 
+</div>
+<div>
+<h1>TS to HTML and TS to HTML</h1>
+
+<ul>
+    <li>
+        My Name is : {{myValues.name}}
+    </li>
+    <li>
+        My age is :  {{myValues.age}}
+    </li>
+    <li>
+        My Roll No. is :  {{myValues.rollNo}}
+    </li>
+    <li>
+       <input type="text" [value]="myValues.inputVal" class="border" 
+       (input)="getVal($event)">
+
+       <button type="button" class="btn btn-primary m-2" (click)="ChangeName()">Change</button>
+    </li>
+    <li>
+       <input type="checkbox" [checked]="myValues.checkBox">
+    </li>
+    <li>
+      <div [hidden]="hiddenVal">  My hidden Value is : 1222222222</div>
+        
+        <button type="button" class="btn btn-primary m-2" (click)="show()">Toggle</button>
+    </li>
+</ul>
+
+</div>
+
+
+</section>
+
+<section>
+
+    <div class="top-heading text-center  m-4 pb-3 border-bottom">
+        Two Way Data Binding 
+     </div>
+    
+     <li>
+        My Name is : {{input}}
+    </li>
+    
+     <li>
+        <input type="text" [value]="input"  
+        [(ngModel)]="input"
+        class="border" 
+        (input)="getVal($event)">
+ 
+    
+     </li>
+</section>
