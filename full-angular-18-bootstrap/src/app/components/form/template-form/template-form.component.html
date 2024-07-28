@@ -1,40 +1,72 @@
 <h1 class="text-center">Template Form</h1>
 
-<form class="d-flex flex-column justify-content-center align-items-center ">
+<form class="d-flex flex-column justify-content-center align-items-center " #form="ngForm">
 
 
     <div class="d-flex justify-content-center align-items-center gap-4">
       
         <div class="mb-3">
-            <label for="username" class="form-label">User Name</label>
-            <input type="text" class="form-control" id="username" aria-describedby="username">
-            <div id="username" class="form-text text-danger">Please Enter Corect Username</div>
+            <label for="username" class="form-label" >User Name</label>
+
+            <input type="text" class="form-control" id="username" aria-describedby="username" name="username"  #username="ngModel" [(ngModel)]="detail.username"  required minlength="6" >
+            
+            <div id="username" class="form-text text-danger">
+           @if (username.errors?.["required"] && username.touched) {   <span> Please Enter Username</span>} 
+           @if (username.errors?.["minlength"]){    <span> Please Enter at least 3 chrecter</span>} 
+            </div>
         </div>
       
         <div class="mb-3">
-            <label for="InputEmail1" class="form-label">Email address</label>
-            <input type="email" class="form-control" id="InputEmail1" aria-describedby="emailHelp">
-            <div id="emailHelp" class="form-text text-danger">Please Enter Corect Email</div>
+            <label for="InputEmail1" class="form-label" >Email address</label>
+            <input type="email" class="form-control" id="InputEmail1" aria-describedby="emailHelp" name="email"  
+           #email="ngModel" required  [(ngModel)]="detail.email">
+             
+            <div id="username" class="form-text text-danger">
+                @if (email.errors?.["required"] && email.touched && email.dirty) {   <span> Please Enter your male</span>} 
+                @if (email.errors?.["minlength"]){    <span> Please Enter at least 3 chrecter</span>} 
+                 </div>
         </div>
       
     </div>
     <div class="d-flex justify-content-center align-items-center gap-4">
         <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label">Password</label>
-            <input type="password" class="form-control" id="exampleInputPassword1">
-        </div>
+            <label for="exampleInputPassword1" class="form-label" >Password</label>
+            <input type="password" class="form-control" id="exampleInputPassword1" name="password" #password="ngModel" required minlength="8" [(ngModel)]="detail.password">
+            <div id="username" class="form-text text-danger">
+                @if (password.errors?.["required"] && password.touched && password.dirty) {  
+                     <span> Pasword is required</span>} 
+                @if (password.errors?.["minlength"] && password.touched && password.dirty) {  
+                     <span> Your password must have 8 digits</span>} 
+           
+        </div></div>
         <div class="mb-3 form-check">
             <h4>Gender</h4>
-            <input type="radio" class="form-check-input" name="gender" id="exampleCheck1">
-            <label class="form-check-label" for="exampleCheck1" name="gender">Male</label>
-            <div>
-            <input type="radio" class="form-check-input" name="gender" id="exampleCheck2">
-            <label class="form-check-label" for="exampleCheck2"  name="gender">Female</label></div>
+            <div (click)="genderClick($event)"  name="female"   [(ngModel)]="detail.gender"> <input type="radio" class="form-check-input" name="gender"   id="male">
+            <label class="form-check-label" for="male" name="gender">Male</label></div>
+            <div  (click)="genderClick($event)" name="female"   [(ngModel)]="detail.gender">
+                <input type="radio" class="form-check-input" name="gender" id="female"   
+              
+            >
+            <label class="form-check-label" for="female"  name="gender">Female</label></div>
         </div>
     </div>
+    <div class="mb-3 form-check">
+        <input type="checkbox" class="form-check-input" id="exampleCheck1" name="termCondition"
+         #terms="ngModel" required [(ngModel)]="detail.termCondition">
+        <label class="form-check-label" for="exampleCheck1 ">Term & Conditions</label>
+      
 
+            <div id="username" class="form-text text-danger">
+                @if (terms.errors?.["required"] && terms.touched && terms.dirty) {  
+                    <span>Please accept Term & Conditions</span>} 
+           
+                </div>
+      </div>
+      
+<div>
+    <button type="submit" class="btn btn-danger m-2" (click)="CleaarformData()">Reset</button>
+    <button type="submit" class="btn btn-primary m-2" (click)="formData()" [disabled]="form.invalid">Submit</button>
+</div>
 
-    <button type="submit" class="btn btn-primary">Submit</button>
-
-
+ 
 </form>
