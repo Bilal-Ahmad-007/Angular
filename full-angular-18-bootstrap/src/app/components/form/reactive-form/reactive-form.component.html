@@ -1,41 +1,107 @@
 <h1 class="text-center">Reactive Form</h1>
 
 
-<form class="d-flex flex-column justify-content-center align-items-center ">
+<form class="d-flex flex-column justify-content-center align-items-center "
+[formGroup]="studentData"
+>
 
 
     <div class="d-flex justify-content-center align-items-center gap-4">
       
         <div class="mb-3">
             <label for="username" class="form-label">User Name</label>
-            <input type="text" class="form-control" id="username" aria-describedby="username">
-            <div id="username" class="form-text text-danger">Please Enter Corect Username</div>
+            <input type="text" class="form-control"  formControlName="username" id="username" aria-describedby="username">
+         
+         @if ( studentData.controls['username'].touched && studentData.controls['username'].errors?.['required']) {   <p id="username" class="form-text text-danger" >Please Enter Corect Username</p>
+           }
+         @if ( studentData.controls['username'].touched && studentData.controls['username'].errors?.['minlength']) {  
+
+             <p class="text-danger">please Enter more then 4 chrachters</p>
+           }
+         @if ( studentData.controls['username'].touched && studentData.controls['username'].errors?.['maxlength']) {  
+             <p class="text-danger">please Enter less then 8 chrachters</p>
+           }
         </div>
       
         <div class="mb-3">
             <label for="InputEmail1" class="form-label">Email address</label>
-            <input type="email" class="form-control" id="InputEmail1" aria-describedby="emailHelp">
-            <div id="emailHelp" class="form-text text-danger">Please Enter Corect Email</div>
+            <input type="email" class="form-control" id="InputEmail1" 
+            formControlName="email"
+           aria-describedby="emailHelp">
+        @if ( studentData.controls['email'].touched && studentData.controls['email'].errors?.['required']) {
+            <p class="text-danger">please Enter your mail first</p>
+        }
+        @if ( studentData.controls['email'].touched && studentData.controls['email'].errors?.['email']) {
+            <p class="text-danger">please Enter your mail correct</p>
+        }
         </div>
       
     </div>
     <div class="d-flex justify-content-center align-items-center gap-4">
         <div class="mb-3">
             <label for="exampleInputPassword1" class="form-label">Password</label>
-            <input type="password" class="form-control" id="exampleInputPassword1">
+            <input type="password" class="form-control" 
+            formControlName="password"
+           id="exampleInputPassword1">
+
+        @if (studentData.controls['password'].touched && studentData.controls['password'].errors?.['required']) {
+            <p class="text-danger">please Enter your password</p>
+        }
+          
+        @if (studentData.controls['password'].touched && studentData.get('password')?.errors?.['passwordStrength']) {
+            <p class="text-danger">
+              @if (!studentData.get('password')?.errors?.['passwordStrength.hasUpperCase']) {   <li >Your password must have a capital leter</li>} 
+              @if (!studentData.get('password')?.errors?.['passwordStrength.hasLowerCase']) {   <li  >Your password must have a small leter</li>} 
+               @if (!studentData.get('password')?.errors?.['passwordStrength.hasNumeric']) {   <li  >Your password must have a number</li>}
+               @if (!studentData.get('password')?.errors?.['passwordStrength.hasSpecialChar']) {   <li  >Your password must have a special chrachter</li>}
+            @if (!studentData.get('password')?.errors?.['passwordStrength.isValidLength']) {    
+                <li  >Your password must have at least 8 chrachters</li>}
+
+            </p>
+        }
+          
+
         </div>
-        <div class="mb-3 form-check">
+
+        <!-- <div class="mb-3 form-check">
             <h4>Gender</h4>
-            <input type="radio" class="form-check-input" name="gender" id="exampleCheck1">
-            <label class="form-check-label" for="exampleCheck1" name="gender">Male</label>
+           <div> <input type="radio" class="form-check-input" 
+            formControlName="gender"
+           name="gender" id="male">
+            <label class="form-check-label" for="male"  name="gender">Male</label></div>
             <div>
-            <input type="radio" class="form-check-input" name="gender" id="exampleCheck2">
-            <label class="form-check-label" for="exampleCheck2"  name="gender">Female</label></div>
-        </div>
+            <input type="radio" class="form-check-input" 
+            formControlName="gender"
+           name="gender" id="female">
+            <label class="form-check-label" for="female"   name="gender">Female</label></div>
+        </div> -->
+
+        <div class="mb-3 form-check">
+            <input type="checkbox" class="form-check-input" id="exampleCheck1" 
+            formControlName="istermConditionConfirm"
+           name="termCondition" >
+            <label class="form-check-label" for="exampleCheck1 ">Term & Conditions</label>
+          
+    @if (studentData.controls['istermConditionConfirm'].touched && studentData.controls['istermConditionConfirm'].errors?.['required'] ) {
+                <div  class="form-text text-danger">
+
+                        <span>Please accept Term & Conditions</span>
+               
+                    </div>
+                }
+          </div>
     </div>
 
-
-    <button type="submit" class="btn btn-primary">Submit</button>
+<div class="d-flex gap-2">
+    <button type="submit" class="btn btn-danger" 
+    (click)="reset()"
+    >
+    Reset</button>
+    <button type="submit" class="btn btn-primary" [disabled]="studentData.invalid" 
+    (click)="submit()"
+    >
+    Submit</button>
+    </div>
 
 
 </form>
